@@ -154,7 +154,7 @@ add_appointment("Liam Brown", "Dr. Patel", "9:00 AM")
 add_appointment("Sarah Lee", "Dr. Nguyen", "9:30 AM")
  
 print(appointments)
-
+Show less
 How it works
 appointments is a list that stores appointment records.
 add_appointment() takes three pieces of information:
