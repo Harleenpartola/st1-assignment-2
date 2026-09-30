@@ -1,0 +1,84 @@
+Stage 1 Lab - Human vs AI: Building Your First SmartCare Prototype
+Learning objectives
+•	Create and run a simple Python file with basic input,output and processing statements
+•	Use lists, dictionaries and functions to enhance the Python file
+•	Build a small SmartCare appointment prototype.
+•	Use AI as a tutor rather than a replacement.
+•	Compare human-written and AI-generated code.
+•	Verify AI-generated code through execution and test inputs.
+•	Document a short AI-use reflection.
+Files to create and commit in GitHub
+stage01/
+  smartcare_v01.py
+  comparison.md
+  reflection.md
+  ai_usage.md
+Part A - Understand the Problem: AI OFF
+SmartCare needs a small prototype that allows a receptionist to record patient appointments. Each appointment records patient name, practitioner name and appointment time.
+What data must be stored?
+-	Patient name 
+-	Practitioner name
+-	Appointment time
+What functions might be useful?
+-	book_appointment()
+-	display_appointment()
+-	cancel_appointment()
+-	check_conflicts()
+What could go wrong?
+-	Duplicate bookings
+-	Blank/missing patient names
+-	Invalid times
+-	Same practitioner booked twice
+-	Wrong data types
+What requirements are unclear?
+-	How cancellations should work
+-	Whether practitioners have fixed working hours
+-	Whether duplicate appointments should be blocked or warned
+-	Whether the receptionist needs reporting features
+-	If the system should store appointment history
+
+5 Limitations:
+1.	No input – everything is hard coded
+2.	No error handling
+3.	No duplicate appointment checking
+4.	No cancellation/editing
+5.	Data disappears when the program ends
+
+
+Part C - Use AI as Tutor: AI ON (Use only UC approved GenAI Tool such as Microsoft CoPilot)
+Act as a Python tutor.
+I am learning introductory software technology.
+Here is a small appointment booking function:
+
+appointments = []
+
+def add_appointment(patient, practitioner, time):
+    appointment = {
+        "patient": patient,
+        "practitioner": practitioner,
+        "time": time
+    }
+    appointments.append(appointment)
+
+def show_appointments():
+    if len(appointments) == 0:
+        print("No appointments yet.")
+    else:
+        for a in appointments:
+            print(f"{a['patient']} with {a['practitioner']} at {a['time']}")
+
+add_appointment("Liam Brown", "Dr. Patel", "2024-08-01 9:00 AM")
+add_appointment("Sarah Lee", "Dr. Nguyen", "2024-08-01 9:30 AM")
+show_appointments()
+
+1. Explain what the code does.
+2. Identify three limitations.
+3. Suggest improvements.
+4. Do not rewrite the whole application.
+5. Ask me two questions to test my understanding.
+
+Part D - Generate an Alternative: AI ON
+Ask AI to create a simple beginner-friendly Python function that stores patient name, practitioner name and appointment time. Explicitly prohibit a database or GUI.
+Create a simple beginner‑friendly Python function that stores patient name, practitioner name, and appointment time. 
+Do NOT use a database or GUI. 
+Keep it simple and suitable for an introductory programming student.
