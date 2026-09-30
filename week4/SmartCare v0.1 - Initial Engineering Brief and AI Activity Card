@@ -1,0 +1,28 @@
+SmartCare v0.1 - Initial Engineering Brief and AI Activity Card
+A2 Case Study Stage 1 student resource
+SmartCare scenario
+SmartCare Community Clinic currently uses spreadsheets and paper records to manage patients and appointments. The client says: 'We need software to help manage patients, practitioners and appointments.' This is not yet a complete specification.
+Initial Engineering Brief
+1. Problem summary
+Smart care community clinic currently relies on spreadsheets, paper records, and manual processes to manage patients, practitioners and appointments. These fragmented methods cause duplicate bookings, lost or inconsistent patient information, unclear appointment statuses, and difficulty tracking practitioner availability. Staff also struggle with manual cancellations and cannot easily generate basic operational reports. The clinic needs a simple, reliable software system that centarlises patient data, supports appointment scheduling, and provides clear visibility of practitioner availability. The first version should be lightweight, easy to use, and suitable for a small clinic, while laying the foundation for future enhancements.
+2. Initial stakeholders
+Stakeholder	Possible need
+Clinic management	Accurate reports, educed errors, and a simple system suitable for small operations
+Reception staff	Easy booking, cancellation, patient lookup, and clear appointment status
+Practitioners 	Reliable schedule visibility, access to patient information, and no double bookings
+Patients	Smooth booking experience, accurate appointment information, fewer administrative mistakes.
+3. Initial features
+Feature	Confirmed or provisional?	Why?
+Patient management	Confirmed 	Clients explicitly need help managing patient information
+Practitioner management 	Confirmed	Required to track practitioner availability 
+Appointment booking & Cancellation	Confirmed 	Core problems are duplicate bookings, manual cancellations, and inconsistent status.
+Online payment 	Provisional	Not mentioned in case study but may be out of scope for v0.1
+4. Questions for the client
+1. What minimum patient information must be stored in the system
+2. How should practitioner availability be defined?
+3. What appointment status do you currently use and want to track?
+4. What specific operational reports do you need in version 1?
+5. What we do not yet know
+1. Exact date fields required for patients, practitioners, and appointments.
+2. Any privacy, security, or access control requirements that clinic must follow
+3. Whether the clinic wants integration with email/SMS reminders or external systems in future versions
