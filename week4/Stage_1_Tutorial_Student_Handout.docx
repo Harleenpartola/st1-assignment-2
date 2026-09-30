@@ -1,0 +1,55 @@
+Stage 1 Tutorial Activity
+ - Why Software Engineering Still Matters
+Stage 1 | Introducing Software Technology Case Study with Python and Guided AI use
+Learning goals
+•	Explain why software engineering is broader than coding.
+•	Identify stakeholders in a simple software problem.
+•	Recognise missing requirements.
+•	Critically evaluate AI-generated feature suggestions.
+•	Explain why AI output should not automatically be treated as correct.
+Activity 1 - Think-Pair-Share (10 minutes)
+If ChatGPT or Copilot can produce a 100-line Python application very quickly, what knowledge does a software engineer still need?
+1.	Requirements & domain understanding: Knowing what the system should do for real users and constraints.
+2.	Quality & risk: Being able to test, debug, secure, and verify that the AI generated code is correct and safe.
+3.	Design & evolution: Designing data models, architecture, and planning for maintenance, scalability, and change over time.
+Activity 2 - Is This Software Engineering? (10 minutes)
+Scenario A: A student writes a 50-line Python calculator.
+Scenario B: A team develops a payroll system used by 5,000 employees.
+Scenario C: An AI assistant generates a simple appointment application from one prompt.
+Scenario	Programming?	Software engineering?	Why?
+A	Yes	No	Small, low risk, no real stakeholders, no formal requirements or long term maintenance. Mostly just coding.
+B	Yes	Yes	Involves requirements, security, reliability, compliance, testing, maintenance, and multiple stakeholders. Clear engineering process.
+C	Yes	Only if engineered 	Code exists, but engineering requires validating requirements, checking correctness, ensuring privacy/security, and integrating with real workflows. Without that, it’s just generated code.
+Activity 3 - SmartCare Problem Analysis (20 minutes)
+Client statement: SmartCare Community Clinic currently uses spreadsheets and paper records to manage patients and appointments. The clinic wants new software to improve these processes.
+Task 1 - Identify stakeholders
+Stakeholder	What do they need?
+Clinic management 	Reliable appointment history, basic operational reports, fewer errors, a simple system suitable for a small clinic.
+Reception/administrative staff	Easy booking, cancellation, and rescheduling; clear appointment status; quick access to patient records; visibility of practitioner availability.
+Practitioners eg. GPs	Accurate patient information, clear daily schedule, reliable appointment history, fewer double bookings
+Patients	Smooth bookings experience, fewer mistakes, no duplicate bookings, clear appointment confirmations and cancellations.
+Task 2 - Identify current problems
+1.	Duplicate appointment bookings due to fragmented spreadsheets and manual processes.
+2.	Difficulty locating patient records because data is scattered across paper and different files
+3.	Limited visibility of practitioner availability, leading to poor scheduling.
+4.	Lack of reliable appointment history for reporting or follow-ups
+Task 3 - Ask client questions
+1.	What minimum data must be stored for each patient 
+2.	How do you currently define and track appointment status
+3.	What specific reports do management need
+4.	How should practitioner availability to be represented
+5.	Do you need any access control or roles
+Activity 4 - Critique an AI Response (15 minutes)
+An AI assistant suggests appointment management; facial-recognition login; AI diagnosis recommendations; patient search; online payment; practitioner schedule view; insurance processing; automatic treatment-plan generation.
+Suggestion	Client evidence?	In scope?	Decision
+Appointment management	Yes, the core problem is the appointments and their status	Yes	Including central features of the system
+Facial recognition login	No mention of advanced authentication	No	Excluding too complex and unnecessary for a small clinic
+AI diagnosis recommendations	No mention of clinical decision support	No	Excluding high risk, outside scope of simple appointment system
+Patient search	Yes, difficulty locating patient records	Yes	Including directly addressed locating patient records
+Online payment	Not mentioned in case study	Maybe	Clarify with client, likely out of scope for first version
+Practitioner schedule view	Yes, limited visibility of practitioner availability	Yes	Includes solves visibility of availability
+Insurance processing	No mention of insurance workflow	No	Exclude – Not requested, adds complexity.
+Treatment-plan generation	No mention of treatment planning	No	Exclude – Clinical responsibility not safe to automate
+Exit question
+Write one activity that a software engineer must perform and that cannot safely be delegated entirely to AI.
+A software engineer must analyses and validate requirements with real stakeholders, because AI cannot reliably understand organisationl context, legal obligations, risks,, or the real world consequences of incorrect or incomplete requirements.
