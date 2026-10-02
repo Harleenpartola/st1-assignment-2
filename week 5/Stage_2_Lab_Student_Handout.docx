@@ -1,0 +1,135 @@
+Part A — Client Brief
+SmartCare currently relies on spreadsheets and paper records. Staff report:
+- duplicate bookings
+- difficulty locating patient information
+- inconsistent appointment status
+- limited appointment history
+
+Management wants a small, maintainable system that supports:
+- patient management
+- practitioner management
+- appointment management
+
+Part B — Stakeholders & Scope
+Stakeholders:
+| Stakeholder          | Need                                               | Evidence                                                |
+|----------------------|----------------------------------------------------|---------------------------------------------------------|
+| Clinic management    | Reliable reports, reduced errors, simple system    | Operational problems + reporting issues                 |
+| Reception staff      | Easy booking, cancellation, record access          | Duplicate bookings, manual cancellations, lost records  |
+| Practitioners (GPs)  | Clear schedule visibility                          | Limited visibility of availability                      |
+| Patients             | Reliable appointments, fewer admin mistakes        | Impact implied by duplicate bookings                    |
+| IT/system maintainer | Simple, maintainable, secure system                | Iterative development + small clinic scope              |
+In Scope:
+- Patient record creation and search
+- Practitioner profiles and availability
+- Appointment booking, cancellation, status updates
+- Appointment history
+- Basic operational reporting
+Out of Scope:
+- Billing or payments
+- SMS/email reminders
+- Integration with external medical systems
+- Clinical notes or diagnosis storage
+
+Provisional: Confirmation required
+- Practitioner ability to edit their own availability
+- Additional appointment status categories
+- Emergency contact fields for patients
+
+Part C — Functional Requirements:
+FR-01: System shall allow creation of new patient records.
+FR-02: System shall allow searching and retrieving patient records.
+FR-03: System shall allow creation and update of practitioner profiles.
+FR-04: System shall allow setting practitioner availability.
+FR-05: System shall allow booking appointments for patients with practitioners.
+FR-06: System shall prevent double-booking of practitioners.
+FR-07: System shall allow cancellation of appointments with recorded reason.
+FR-08: System shall allow updating appointment status (booked, cancelled, completed).
+FR-09: System shall display practitioner schedules in a calendar view.
+FR-10: System shall maintain appointment history for each patient.
+FR-11: System shall generate basic operational reports.
+FR-12: System shall support user roles with access control.
+
+Part D — Non‑Functional Requirements:
+NFR-01: System shall provide an intuitive and easy-to-use interface.
+NFR-02: System shall respond to common operations within 2 seconds.
+NFR-03: System shall ensure secure storage of patient and practitioner data.
+NFR-04: System shall be reliable with no data loss during normal operation.
+NFR-05: System shall support incremental enhancements without major redesign.
+NFR-06: System shall support backup and recovery procedures.
+
+Part E — User Stories & Acceptance Criteria:
+User Stories:
+US-01: As a receptionist, I want to create patient records, so that I can store their information accurately.
+US-02: As a receptionist, I want to book appointments, so that I can schedule consultations efficiently.
+US-03: As a receptionist, I want the system to prevent double-booking, so that I avoid appointment conflicts.
+US-04: As a practitioner, I want to view my schedule, so that I can plan my day.
+US-05: As a clinic manager, I want to generate reports, so that I can monitor clinic performance.
+US-06: As a clinic manager, I want user access control, so that sensitive data is protected.
+
+
+Acceptance Criteria:
+AC-01 — Prevent duplicate bookings -
+GIVEN a practitioner already has an appointment at a specific time
+WHEN the receptionist attempts to book another appointment at that same time
+THEN the system shall display an error and prevent the booking
+
+AC-02 — Practitioner schedule view -
+GIVEN a practitioner is logged in
+WHEN they open their schedule
+THEN the system shall display all appointments with times, patients, and statuses
+
+AC-03 — Negative scenario: invalid patient search - 
+GIVEN a receptionist enters a patient name that does not exist
+WHEN they perform a search
+THEN the system shall display “No matching records found”
+
+Part F — AI Requirements Review (AI ON)
+AI Reviewer Output - Summary
+ - Suggested clarifying appointment status categories → Assumption, needs validation
+ - Suggested adding user roles → Evidence-based (privacy concerns)
+ - Suggested confirming practitioner availability editing → Assumption, needs validation
+ - Suggested adding reporting requirement → Evidence-based (case study mentions reporting issues)
+ - Suggested performance requirement → Assumption, but reasonable
+
+ Part G — Verification of AI Review:
+ - AI Suggestion: Add user roles
+Decision: Accepted
+Evidence: Sensitive patient data requires access control.
+ - AI Suggestion: Add reporting requirement
+Decision: Accepted
+Evidence: Case study explicitly mentions reporting problems.
+ - AI Suggestion: Add performance requirement
+Decision: Modified
+Evidence: Not stated by client; kept minimal (2 seconds).
+ - AI Suggestion: Practitioner editing availability
+Decision: Unverified
+Evidence: Client did not specify; needs confirmation.
+ - AI Suggestion: More appointment status categories
+Decision: Rejected
+Evidence: No client request; avoid inventing requirements.
+
+Part H — Final SmartCare v0.2 Package:
+Includes:
+- Stakeholder analysis
+- Scope
+- 12 functional requirements
+- 6 non-functional requirements 
+- 6 user stories
+- Acceptance criteria
+- Assumptions & open questions
+- Verified AI review evidence
+
+Reflection:
+The Ai reviewer highlighted serveral areas that I initially overlooked, particiularly around ambiguity
+and testability. It noticed that some requirements lacked measurable outcomes, such as performance
+expectations and access control, which are important for a real system even if not explicitly stated.
+However, the AI also attempted to introduce new features that were not part of the client brief, such 
+as expanded appointment status categories and practitioner conrtolled availability. These suggestions
+were overreaches because they were not supported by evidence from the case study. One reuqirement that 
+changed after review was the inclusion of user roles and access control, which become necessary once 
+privacy concerns were considered. This change strengthened the sepcification without inventing new 
+functionality. Requirements must have evidence because they form a contract between the client and
+the development team. Adding features without client validation leads to scope creep, wasted effort, 
+and misaligned expectations. Evidence based reuqirements ensure that the system solves real problems
+and remains mangageable for the small clinic environment.
