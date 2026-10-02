@@ -1,0 +1,102 @@
+Candidate class analysis 
+| Candidate Concept | Candidate Class? | Reason |
+|-------------------|------------------|--------|
+| Patient           | Yes              | Core entity with attributes and behaviours |
+| Practitioner      | Yes              | Core entity with availability and identity |
+| Appointment       | Yes              | Central scheduling entity linking patient + practitioner |
+| Name              | No               | Attribute of Patient/Practitioner, not a standalone class |
+| Clinic            | Maybe            | Could represent system-level aggregation; optional |
+| Database          | No               | Technical implementation detail, not domain model |
+| Cancellation      | No               | Event or status change, not a standalone class |
+| Status            | No               | Attribute of Appointment |
+
+CRC Cards: Class responsibility collaborator
+Patient:
+Responsibilities:
+- Store patient details
+- Provide patient identification
+- Link to appointment history
+Collaborators:
+- Appointment
+
+Practitioner:
+Responsibilities:
+- Store practitioner details
+- Maintain availability
+- View schedule
+Collaborators:
+- Appointment
+
+Appointment:
+Responsibilities:
+- Store appointment time, date, status
+- Link patient and practitioner
+- Update status (booked, cancelled, completed)
+Collaborators:
+- Patient
+- Practitioner
+
+Relationship reasoning:
+Patient - Appointment
+Relationship: One to many - A patient can have many appointments
+Reason: Patients attened multiple consultations over time
+
+Practioner - Appointment 
+Multiplicity: One to many - A practinoner handles many appointment 
+Reason: Practioner see multiple patients daily
+
+Should Appointment inherit from Patient?
+No.
+Reason:  
+Inheritance represents “is-a” relationships.
+An appointment is not a patient — it links a patient and practitioner.
+Correct relationship: association, not inheritance.
+
+Does Clinic need to own every object?
+Optional.
+
+Reason:  
+A “Clinic” class can act as a system root (aggregate), but it is not required.
+The domain model works fine with Patient, Practitioner, and Appointment as primary classes.
+
+AI Model Critique (Stage 3)
+Critique the following AI‑proposed classes:
+
+PatientManager
+Issue: Manager classes are implementation details, not domain concepts.
+Verdict: Reject for domain model; acceptable later in software architecture.
+
+PractitionerManager:
+Same reasoning as above.
+Reject for domain model.
+
+AppointmentManager:
+Represents system behaviour, not domain entity.
+Reject for domain model.
+
+ClinicController:
+“Controller” is a UI/logic layer concept.
+Reject for domain model.
+
+NotificationManager:
+SmartCare v0.2 does not include notifications.
+Reject — out of scope.
+
+ScheduleEngine:
+Over-engineered for a small clinic.
+Reject — not part of the domain model.
+
+Final domain model:
+Classes: 
+- Patient
+- Practioner 
+- Appointment
+
+Attributes:
+Patient: id, name, contact
+Practitioner: id, name, availability
+Appointment: id, date, time, status, patientID, practitionerID
+
+Relationships:
+Patient 1..* Appointment
+Practitioner 1..* Appointment - Appointment links both
