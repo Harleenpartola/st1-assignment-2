@@ -1,0 +1,101 @@
+Requirement-to-Concept Trace:
+| Requirement                         | Concept        | State/Behaviour                     | Decision        |
+|-------------------------------------|----------------|--------------------------------------|-----------------|
+| Create patient records              | Patient        | Stores patient details               | Accepted        |
+| Search patient records              | Patient        | Provides lookup identifiers          | Accepted        |
+| Manage practitioner availability    | Practitioner   | Availability schedule                | Accepted        |
+| Book appointments                   | Appointment    | Links patient + practitioner         | Accepted        |
+| Prevent double-booking              | Appointment    | Conflict detection                   | Accepted        |
+| Update appointment status           | Appointment    | Status changes                       | Accepted        |
+| View practitioner schedule          | Practitioner   | Retrieves appointments                | Accepted        |
+| Generate reports                    | Appointment    | Historical data                       | Accepted        |
+
+CRC Cards:
+Patient:
+Responsibilities:
+- Store patient details
+- Provide patient identification
+- Link to appointment history
+Collaborators:
+- Appointment
+
+Practitioner:
+Responsibilities:
+- Store practitioner details
+- Maintain availability
+- View schedule
+Collaborators:
+- Appointment
+
+Appointment:
+Responsibilities:
+- Store appointment date, time, status
+- Link patient and practitioner
+- Update status (booked, cancelled, completed)
+Collaborators:
+- Patient
+- Practitioner
+
+Clinic:
+Responsibilities:
+- Aggregate system-level objects
+- Provide high-level coordination 
+Collaborators:
+- Patient
+- Practitioner
+- Appointment
+
+UML Class diagram:
++----------------+        1        *      +------------------+
+|    Patient     |------------------------|    Appointment    |
++----------------+                        +------------------+
+| patientID      |                        | appointmentID     |
+| name           |                        | date              |
+| contact        |                        | time              |
++----------------+                        | status            |
+                                          | patientID         |
+                                          | practitionerID    |
+                                          +------------------+
+                                                     *
+                                                     |
+                                                     |
+                                                     1
+                                          +------------------+
+                                          |   Practitioner   |
+                                          +------------------+
+                                          | practitionerID   |
+                                          | name             |
+                                          | availability     |
+                                          +------------------+
+
+Multiplicities:
+Patient 1.. Appointment*
+Practitioner 1.. Appointment*
+Appointment links both
+
+Design Rationale:
+The domain model focuses on three core entities, patient, practitioner and appointments.
+These represent the essential real world concepts described in the Smartcare case study.
+Responsibilities were allocated based on what each entitiy naturally owns, patients for 
+example storing personal details, practitioners store availability, and appointments store
+scheduling information. Relationships reflect real clinic operations like patients and 
+practioners both have many appointments, while each appointment links exactly one patient
+and one practinoner. Optional classes such as clinic were excluded from the core model 
+because they reprsent syste level aggregation rather than domain concepts. Tehnical constructs
+like manager, controllers, or databases were intertionally excluded because they belong to software
+architecture, not the domain model.
+
+AI Design Review Record:
+| AI Suggestion          | Evidence          | Decision     | Reason                                      | Model Change |
+|------------------------|-------------------|--------------|---------------------------------------------|--------------|
+| PatientManager         | None              | Rejected     | Implementation detail, not domain concept   | None         |
+| PractitionerManager    | None              | Rejected     | Same as above                               | None         |
+| AppointmentManager     | None              | Rejected     | Not a domain entity                         | None         |
+| ClinicController       | None              | Rejected     | Controller belongs to UI/logic layer        | None         |
+| NotificationManager    | Out of scope      | Rejected     | SmartCare v0.2 has no notifications         | None         |
+| ScheduleEngine         | None              | Rejected     | Over-engineered for small clinic            | None         |
+
+
+
+
+
