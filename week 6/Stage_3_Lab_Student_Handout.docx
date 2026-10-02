@@ -1,0 +1,169 @@
+Stage 3 Lab Activities – SmartCare Domain Modelling
+AI off - AI on - compare - Verify
+A — Requirements Review (SmartCare v0.2)
+Nouns (candidate concepts)
+- Patient
+- Practitioner
+- Appointment
+- Schedule
+- Availability
+- Record
+- Status
+- Report
+- Booking
+- History
+
+Verbs (behaviours / operations)
+- Create patient records
+- Search patient records
+- Book appointments
+- Cancel appointments
+- Update status
+- View schedule
+- Generate reports
+
+Business Rules
+- No double-booking allowed
+- Appointment must link a patient and practitioner
+- Appointment status must be tracked
+- Patient and practitioner records must be searchable
+- System must maintain appointment history
+
+B- Candidate Class:
+| Concept       | Class? | Supporting Requirements                | State/Behaviour                         |
+|---------------|--------|----------------------------------------|------------------------------------------|
+| Patient       | Yes    | FR-01, FR-02, FR-10                    | name, contact, history                   |
+| Practitioner  | Yes    | FR-03, FR-04, FR-09                    | name, availability, schedule             |
+| Appointment   | Yes    | FR-05, FR-06, FR-07, FR-08, FR-10      | date, time, status, patient, practitioner|
+| Status        | No     | FR-08                                  | attribute of Appointment                 |
+| Cancellation  | No     | FR-07                                  | event, not a class                       |
+| Report        | No     | FR-11                                  | output, not a class                      |
+| Clinic        | Maybe  | Optional aggregation                    | system-level container                   |
+| Database      | No     | NFR-03                                 | implementation detail                    |
+
+C - CRC Cards:
+Patient:
+Responsibilities:
+- Store patient details
+- Provide identification
+- Link to appointment history
+Collaborators:
+- Appointment
+
+Practitioner:
+Responsibilities:
+- Store practitioner details
+- Maintain availability
+- View schedule
+Collaborators:
+- Appointment
+
+Appointments:
+Responsibilities:
+- Store appointment date, time, status
+- Link patient and practitioner
+- Update status
+Collaborators:
+- Patient
+- Practitioner
+
+D - UML Diagram:
++----------------+        1        *      +------------------+
+|    Patient     |------------------------|    Appointment    |
++----------------+                        +------------------+
+| patientID      |                        | appointmentID     |
+| name           |                        | date              |
+| contact        |                        | time              |
++----------------+                        | status            |
+                                          | patientID         |
+                                          | practitionerID    |
+                                          +------------------+
+                                                     *
+                                                     |
+                                                     |
+                                                     1
+                                          +------------------+
+                                          |   Practitioner   |
+                                          +------------------+
+                                          | practitionerID   |
+                                          | name             |
+                                          | availability     |
+                                          +------------------+
+
+Association & Multiplilicities:
+Patient 1..* Appointment
+Practitioner 1..* Appointment
+Appointment links exactly one patient and one practitioner
+
+E - AI Design Review: AI ON
+AI was asked to propose classes only from confirmed requirements and cite requirement IDs.
+
+AI Suggestions
+- Add UserRole class → supported by NFR-03 (security)
+- Add ScheduleView class → supported by FR-09
+- Add AppointmentManager → unsupported (implementation detail)
+- Add NotificationManager → unsupported (not in requirements)
+
+F - Compare & Decide:
+Accepted:
+- UserRole
+Reason: NFR-03 requires secure access control.
+
+Modified:
+- ScheduleView → integrated into Practitioner instead of separate class.
+Reason: FR-09 supports schedule viewing but not a new class.
+
+Rejected:
+- AppointmentManager, NotificationManager, ClinicController
+Reason: No supporting requirement IDs; these are implementation details.
+
+G - Python Skeltons:
+Patient - 
+class Patient:
+    def __init__(self, patient_id, name, contact):
+        self.patient_id = patient_id
+        self.name = name
+        self.contact = contact
+        self.history = []
+
+Practioner - 
+class Practitioner:
+    def __init__(self, practitioner_id, name, availability):
+        self.practitioner_id = practitioner_id
+        self.name = name
+        self.availability = availability
+        self.schedule = []
+
+Appointments - 
+class Appointment:
+    def __init__(self, appointment_id, date, time, patient, practitioner, status):
+        self.appointment_id = appointment_id
+        self.date = date
+        self.time = time
+        self.patient = patient
+        self.practitioner = practitioner
+        self.status = status
+
+H — Consistency Check
+- All classes match the domain model.
+- Attributes in Python match UML attributes.
+- Associations represented through object references.
+- No extra behaviour implemented (as required).
+- No technical classes (managers, controllers) included.
+
+Reflection:
+The hardest modelling decision was determing which concepts belonged in the domain model versus which were implementation
+details. For example, appointment manager and clinic controller sounded useful, but they did not represent real world 
+entities and had no supporiting requirements. The AI frequently over designed by suggesting technical classes that belong
+in software architecture, not the domain model. The evidence that guided my final chocies came directly from the functional 
+requirements; each domain class had to map to an observable capability. Patient, practioner, and appointment clearly
+aligned with FR-01 through FR-10, while concepts like notification manger had no reuqirement support and were rejected.
+Another challenge was  deciding whether schedule view should be a class. The AI suggested it with evidence from FR-09,
+but the reuqirement only described a behaviour, not a new eneity, so I modeified the suggestion and kept sechdule viewing
+inside the practioner class. Overall, evidence from the requirements ensured the model stayed simple, accurate, and aligned 
+with the small clinic scope.
+
+
+
+
+
