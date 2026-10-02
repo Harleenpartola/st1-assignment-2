@@ -11,12 +11,14 @@ Scope:
 SmartCare v0.2 will deliver a simple, centralised appointment booking system for patient, practitioner, and appointment management. It is not a hospital information system.
 
 2. Stakeholders:
-Stakeholder	Need	Evidence
-Clinic management	Reliable reports, reduced errors, simple system	Case study mentions operational problems + reporting issues
-Reception staff	Easy booking, cancellation, record access	Duplicate bookings, manual cancellations, lost records
-Practitioners (GPs)	Clear schedule visibility	Limited visibility of availability
-Patients	Reliable appointments, fewer admin mistakes	Impact implied by duplicate bookings
-IT/system maintainer	Simple, maintainable, secure system	Iterative development + small clinic scope
+| Stakeholder         | Need                                           | Evidence                                                |
+|---------------------|------------------------------------------------|---------------------------------------------------------|
+| Clinic management   | Reliable reports, reduced errors, simple system | Case study mentions operational problems + reporting issues |
+| Reception staff     | Easy booking, cancellation, record access       | Duplicate bookings, manual cancellations, lost records |
+| Practitioners (GPs) | Clear schedule visibility                       | Limited visibility of availability                     |
+| Patients            | Reliable appointments, fewer admin mistakes     | Impact implied by duplicate bookings                   |
+| IT/system maintainer| Simple, maintainable, secure system             | Iterative development + small clinic scope             |
+
 
 
 3. Functional Requirements:
