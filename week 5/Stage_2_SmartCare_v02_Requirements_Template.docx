@@ -1,0 +1,296 @@
+1. Problem and Scope
+SmartCare Clinic currently uses spreadsheets, paper records, and manual processes to manage patients, practitioners, and appointments. This causes:
+- duplicate bookings
+- difficulty locating patient records
+- inconsistent appointment status
+- limited visibility of practitioner availability
+- manual cancellations
+- unreliable appointment history
+- difficulty producing reports
+Scope:  
+SmartCare v0.2 will deliver a simple, centralised appointment booking system for patient, practitioner, and appointment management. It is not a hospital information system.
+
+2. Stakeholders
+| Stakeholder         | Need                                               | Evidence                                                |
+|---------------------|----------------------------------------------------|---------------------------------------------------------|
+| Clinic management   | Reliable reports, reduced errors                   | Reporting issues mentioned in case study               |
+| Reception staff     | Easy booking, cancellation, record access          | Duplicate bookings, manual cancellations               |
+| Practitioners (GPs) | Clear visibility of schedule                       | Limited visibility of practitioner availability        |
+| Patients            | Reliable appointments                              | Impact implied by duplicate bookings                   |
+| IT maintainer       | Simple, maintainable, secure system                | Iterative development + small clinic scope             |
+
+Today
+case study:Assignment 2 Case study
+Case Study Title: SmartCare Clinic Appointment Booking
+System
+SmartCare is a small community clinic that provides consultations through a number
+of healthcare practitioners (GPs). The clinic currently manages patient information and
+appointments using a combination of spreadsheets, paper records and manual
+processes.
+The clinic has experienced several operational problems, including:
+• duplicate appointment bookings;
+• difficulty locating patient records;
+• inconsistent appointment status information;
+• limited visibility of practitioner availability;
+• manual cancellation processes;
+• lack of reliable appointment history;
+• difficulty producing basic operational reports.
+Management wants a simple software system that can initially support patient,
+practitioner and appointment management.
+The organisation does not want a complex hospital information system. The first
+version should be a manageable application suitable for a small clinic.
+You have been hired as a junior software engineer with a job description of developing a
+simple software system that will replace the current fragmented manual and
+spreadsheet-based processes. You will develop this system iteratively in multiple
+stages, with step by step enhancement in the software prototype in every stage.
+You will complete the tasks for each stage as detailed in activities described here, every
+week from week 4 to week 8
+
+
+task:
+SmartCare v0.2 - Requirements Specification
+Template
+1. Problem and Scope
+2. Stakeholders
+Stakeholder Need Evidence
+3. Functional Requirements
+FR-01: _________________________________________________
+FR-02: _________________________________________________
+FR-03: _________________________________________________
+FR-04: _________________________________________________
+FR-05: _________________________________________________
+FR-06: _________________________________________________
+FR-07: _________________________________________________
+FR-08: _________________________________________________
+FR-09: _________________________________________________
+FR-10: _________________________________________________
+FR-11: _________________________________________________
+FR-12: _________________________________________________
+4. Non-Functional Requirements
+NFR-01: ________________________________________________
+NFR-02: ________________________________________________
+NFR-03: ________________________________________________
+NFR-04: ________________________________________________
+NFR-05: ________________________________________________
+NFR-06: ________________________________________________
+5. User Stories
+US-01: As a __________, I want __________, so that __________.
+US-02: As a __________, I want __________, so that __________.
+US-03: As a __________, I want __________, so that __________.
+US-04: As a __________, I want __________, so that __________.
+US-05: As a __________, I want __________, so that __________.
+US-06: As a __________, I want __________, so that __________.
+6. Acceptance Criteria
+GIVEN ______________________________________________
+WHEN _______________________________________________
+THEN _______________________________________________
+GIVEN ______________________________________________
+WHEN _______________________________________________
+THEN _______________________________________________
+GIVEN ______________________________________________
+WHEN _______________________________________________
+THEN _______________________________________________
+7. Assumptions and Open Questions
+8. AI Requirements Review Record
+AI suggestion Evidence? Decision Reason Verification
+See my thinking
+SmartCare v0.2 – Requirements Specification
+1. Problem and scope
+SmartCare Community Clinic currently uses spreadsheets, paper records, and manual processes to manage patients, practitioners, and appointments. This leads to duplicate bookings, difficulty locating patient records, inconsistent appointment status information, limited visibility of practitioner availability, manual cancellation processes, unreliable appointment history, and difficulty producing basic operational reports.
+
+The scope of SmartCare v0.2 is to deliver a simple, centralised appointment booking system that supports patient, practitioner, and appointment management for a small clinic. It will replace fragmented manual processes, but will not attempt to be a full hospital information system.
+
+2. Stakeholders
+Stakeholder	Need	Evidence
+Clinic management	Reduced errors, reliable reports, and a manageable system suitable for a small clinic.	Case study mentions operational problems and difficulty producing basic operational reports.
+Reception staff	Easy booking, cancellation, and clear access to patient and appointment information.	Case study mentions duplicate bookings, manual cancellation, difficulty locating patient records.
+Practitioners (GPs)	Clear visibility of their schedule and accurate appointment status.	Case study mentions limited visibility of practitioner availability and inconsistent appointment info.
+Patients	Reliable appointments, fewer administrative mistakes, and clear communication.	Case study implies impact on patients through duplicate bookings and poor record management.
+IT/system maintainer	A simple, maintainable, secure system that can be enhanced in stages.	Case study states iterative development and desire for a manageable application.
+
+
+3. Functional requirements
+FR-01: The system shall allow reception staff to create new patient records with basic demographic and contact information.
+FR-02: The system shall allow reception staff to search and retrieve existing patient records by name, ID, or contact details.
+FR-03: The system shall allow creation, update, and removal of practitioner (GP) profiles, including availability (days and times).
+FR-04: The system shall allow reception staff to create new appointments by selecting a patient, practitioner, date, and time.
+FR-05: The system shall prevent duplicate appointment bookings for the same practitioner at the same date and time.
+FR-06: The system shall display practitioner availability and existing bookings in a calendar or schedule view.
+FR-07: The system shall allow reception staff to update appointment status (e.g., booked, cancelled, completed, no-show).
+FR-08: The system shall allow reception staff to cancel appointments and record the reason for cancellation.
+FR-09: The system shall maintain an appointment history for each patient and practitioner.
+FR-10: The system shall generate basic operational reports (e.g., number of appointments per day, cancellations, practitioner workload).
+FR-11: The system shall support different user roles (e.g., receptionist, practitioner, admin) with appropriate access rights.
+FR-12: The system shall allow practitioners to view their own schedule and associated patient appointment details.
+
+4. Non-functional requirements
+NFR-01: The system shall be easy to use for non-technical staff, with a simple and intuitive user interface.
+NFR-02: The system shall respond to common operations (e.g., search, booking) within 2 seconds under normal load.
+NFR-03: The system shall ensure patient and practitioner data is stored securely and protected from unauthorised access.
+NFR-04: The system shall be reliable, with no data loss for confirmed appointments and records during normal operation.
+NFR-05: The system shall be designed to allow incremental enhancements in future versions without major rework.
+NFR-06: The system shall support backup and recovery procedures to restore data in case of system failure.
+
+5. User stories
+US-01: As a receptionist, I want to quickly create and update patient records, so that I can manage patient information accurately.
+
+US-02: As a receptionist, I want to book appointments by selecting a patient and practitioner, so that I can schedule consultations efficiently.
+
+US-03: As a receptionist, I want the system to prevent double-booking a practitioner, so that I avoid appointment conflicts.
+
+US-04: As a practitioner, I want to view my daily and weekly schedule, so that I can plan my consultations.
+
+US-05: As a clinic manager, I want to generate basic reports on appointments and cancellations, so that I can monitor clinic operations.
+
+US-06: As a clinic manager, I want user roles and access control, so that sensitive patient data is only visible to authorised staff.
+
+6. Acceptance criteria
+Scenario 1 – Prevent duplicate bookings  
+GIVEN a practitioner already has an appointment booked at a specific date and time
+WHEN the receptionist attempts to create another appointment for the same practitioner at that date and time
+THEN the system shall display an error message and prevent the duplicate booking.
+
+Scenario 2 – View practitioner schedule  
+GIVEN a practitioner is logged into the system
+WHEN they open the schedule view for a selected day or week
+THEN the system shall display all their appointments with patient names, times, and statuses.
+
+Scenario 3 – Generate basic operational report  
+GIVEN the clinic manager selects a date range and report type (e.g., appointments per day)
+WHEN they request the report
+THEN the system shall generate and display a summary of appointments, including counts and relevant statistics.
+
+7. Assumptions and open questions
+Assumptions:
+
+A-01: The clinic operates with a small number of practitioners and patients, so performance requirements are modest.
+
+A-02: The system will be used primarily by reception staff and practitioners within the clinic premises.
+
+A-03: Integration with external systems (e.g., SMS/email reminders, payment systems) is out of scope for v0.2.
+
+Open questions:
+
+Q-01: What exact data fields are required for patient records (e.g., Medicare number, emergency contact)?
+
+Q-02: What appointment status categories does the clinic want to standardise (e.g., rescheduled, in-progress)?
+
+Q-03: Are there any regulatory or compliance requirements (e.g., specific privacy standards) that must be met?
+
+Q-04: Should practitioners be able to modify their own availability, or is this restricted to admin/reception?
+
+8. AI requirements review record
+AI suggestion	Evidence?	Decision	Reason	Verification
+Include user roles and access control as a functional requirement (FR-11).	Common practice for systems with sensitive data.	Accepted	Protects patient privacy and supports different stakeholder needs.	Confirm with client that roles and permissions are needed.
+Add non-functional requirement for performance (NFR-02: 2-second response time).	General usability expectation for small systems.	Accepted (provisional)	Ensures system is responsive for reception workflows.	Measure response times during testing.
+Exclude online payments and advanced features from v0.2 scope.	Not mentioned in case study; small clinic context.	Accepted	Keeps system simple and aligned with stated scope.	Validate with client that payments are out of scope.
+Add reporting features as a core functional requirement (FR-10).	Case study explicitly mentions difficulty reporting.	Accepted	Directly addresses a stated operational problem.	Verify report types with clinic management.
+Consider integration with SMS/email reminders in future versions only.	Not in case study; potential future enhancement.	Deferred	Could be useful but not essential for initial version.	Revisit in later stages after client consultation.
+
+
+If you want, we can now turn this into a neat document or map it to diagrams (use cases, class model, etc.) for your next stage.
+
+make the tables and stuff so everything is compatible layout with vs code
+Got you, Harleen — here’s a VS Code‑friendly version of your entire SmartCare v0.2 Requirements Specification.
+Everything is formatted in pure Markdown, so you can paste it straight into your .md file and it will render perfectly.
+
+No fancy formatting, no weird spacing — just clean Markdown tables, headings, and lists that VS Code handles beautifully.
+
+SmartCare v0.2 – Requirements Specification
+1. Problem and Scope
+SmartCare Clinic currently uses spreadsheets, paper records, and manual processes to manage patients, practitioners, and appointments. This causes:
+
+duplicate bookings
+
+difficulty locating patient records
+
+inconsistent appointment status
+
+limited visibility of practitioner availability
+
+manual cancellations
+
+unreliable appointment history
+
+difficulty producing reports
+
+Scope:  
+SmartCare v0.2 will deliver a simple, centralised appointment booking system for patient, practitioner, and appointment management. It is not a hospital information system.
+
+2. Stakeholders:
+Stakeholder	Need	Evidence
+Clinic management	Reliable reports, reduced errors, simple system	Case study mentions operational problems + reporting issues
+Reception staff	Easy booking, cancellation, record access	Duplicate bookings, manual cancellations, lost records
+Practitioners (GPs)	Clear schedule visibility	Limited visibility of availability
+Patients	Reliable appointments, fewer admin mistakes	Impact implied by duplicate bookings
+IT/system maintainer	Simple, maintainable, secure system	Iterative development + small clinic scope
+
+
+3. Functional Requirements:
+FR-01: System shall allow creation of new patient records.
+FR-02: System shall allow searching and retrieving patient records.
+FR-03: System shall allow creation and update of practitioner profiles and availability.
+FR-04: System shall allow booking appointments for patients with practitioners.
+FR-05: System shall prevent duplicate bookings for the same practitioner/time.
+FR-06: System shall display practitioner availability and booked appointments.
+FR-07: System shall allow updating appointment status (booked, cancelled, completed).
+FR-08: System shall allow cancellation of appointments with reason recorded.
+FR-09: System shall maintain appointment history for patients and practitioners.
+FR-10: System shall generate basic operational reports.
+FR-11: System shall support user roles with access control.
+FR-12: System shall allow practitioners to view their own schedule.
+
+4. Non‑Functional Requirements"
+NFR-01: System shall have a simple, intuitive user interface.
+NFR-02: System shall respond to common operations within 2 seconds.
+NFR-03: System shall store data securely and prevent unauthorised access.
+NFR-04: System shall be reliable with no data loss during normal operation.
+NFR-05: System shall support incremental enhancements in future versions.
+NFR-06: System shall support backup and recovery procedures.
+
+5. User Stories:
+US-01: As a receptionist, I want to create/update patient records, so that I can manage patient information accurately.
+US-02: As a receptionist, I want to book appointments, so that I can schedule consultations efficiently.
+US-03: As a receptionist, I want the system to prevent double-booking, so that I avoid appointment conflicts.
+US-04: As a practitioner, I want to view my schedule, so that I can plan my consultations.
+US-05: As a clinic manager, I want to generate reports, so that I can monitor clinic operations.
+US-06: As a clinic manager, I want user roles and access control, so that sensitive data is protected.
+
+6. Acceptance Criteria:
+Scenario 1 – Prevent duplicate bookings:
+GIVEN a practitioner already has an appointment at a specific date/time
+WHEN the receptionist attempts to book another appointment at that same date/time
+THEN the system shall display an error and prevent the booking
+
+Scenario 2 – View practitioner schedule:
+GIVEN a practitioner is logged in
+WHEN they open their schedule view
+THEN the system shall display all appointments with patient names, times, and statuses
+
+Scenario 3 – Generate operational report:
+GIVEN the manager selects a date range and report type
+WHEN they request the report
+THEN the system shall generate and display appointment statistics
+
+7. Assumptions and Open Questions:
+Assumptions
+A-01: Clinic size is small; performance requirements are modest.
+A-02: System used mainly by reception staff and practitioners.
+A-03: External integrations (SMS/email) are out of scope for v0.2.
+
+Open Questions
+Q-01: What exact patient data fields are required?
+Q-02: What appointment status categories should be standardised?
+Q-03: Are there regulatory compliance requirements?
+Q-04: Can practitioners modify their own availability?
+
+8. AI Requirements Review Record:
+| AI Suggestion                         | Evidence?                     | Decision  | Reason                                  | Verification                    |
+|---------------------------------------|-------------------------------|-----------|------------------------------------------|----------------------------------|
+| Add user roles & access control       | Sensitive data handling       | Accepted  | Protects privacy                         | Confirm with client              |
+| Add performance requirement           | Usability expectation         | Accepted  | Ensures responsiveness                    | Test response times              |
+| Exclude advanced features             | Not in case study             | Accepted  | Keeps scope small                         | Confirm with client              |
+| Add reporting features                | Reporting issues mentioned    | Accepted  | Addresses operational problems            | Verify report types              |
+| Future integrations (SMS/email)       | Potential enhancement         | Deferred  | Not needed for v0.2                       | Revisit later                    |
+
+
