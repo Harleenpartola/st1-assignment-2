@@ -1,0 +1,79 @@
+Activity 1 — Encapsulation Review
+| Class        | Protected State / Invariant                           | Public Operations                          |
+|--------------|--------------------------------------------------------|---------------------------------------------|
+| Patient      | patientID never changes; name/contact must be valid   | getDetails(), updateContact()               |
+| Practitioner | availability must follow clinic rules; ID fixed        | getSchedule(), updateAvailability()         |
+| Appointment  | status must follow legal transitions; time fixed       | cancel(), complete(), reschedule()          |
+
+Activity 2 — Composition or Inheritance:
+Appointment - Patient
+Composition/association
+Reason: An appointment has a patient. A patient is not a type of appointment. This is a relationship, not inheritance.
+
+Appointment - Practitioner
+Composition/association
+Reason: An appointment has a practitioner. A practitioner is not a subtype of appointment.
+
+Doctor - Practitioner (hypothetical)
+Inheritance
+Reason: A doctor is a type of practitioner with extra attributes. 
+
+Clinic - Appointment
+Composition/association
+Reason: A clinic contains appointments. The clinic is an aggregate root, not a superclass.
+
+Activity 3 — Responsibility Allocation:
+Who decides whether SCHEDULED can become CANCELLED?
+ - Appointment class: Status transitions are part of the appointment’s internal rules (invariant).
+   The UI must not decide business rules.
+
+Who validates a patient name?
+ - Patient class: Validation belongs inside the domain model, not the UI.
+
+Should Appointment execute SQL? Why?
+No.  
+SQL belongs in the data access layer. Domain objects should not know how data is stored — keeps them pure and testable.
+
+Should the UI decide whether a status transition is legal?
+No.  
+UI only triggers actions. The domain model enforces rules.
+
+Activity 4 — AI Code Critique
+AI generated an Appointment class with:
+- public status mutation
+- SQL inside cancel()
+- NotificationManager dependency
+- inheritance from PatientRecord
+- other over-designed elements
+
+Five design problems + corrections
+Public status mutation
+Problem: Anyone can change status → breaks invariants.
+Fix: Make status private; expose controlled methods like cancel() or complete().
+
+SQL inside cancel()
+Problem: Violates separation of concerns; domain object shouldn’t talk to the database.
+Fix: Move SQL to a repository class.
+
+NotificationManager dependency
+Problem: Appointment shouldn’t know about external services.
+Fix: Use an event or service layer to trigger notifications.
+
+Inheritance from PatientRecord
+Problem: Appointment is not a type of patient record → incorrect hierarchy.
+Fix: Remove inheritance; use composition (appointment has a patient).
+
+Too many responsibilities
+Problem: Appointment is doing scheduling, notifications, persistence.
+Fix: Apply Single Responsibility Principle — keep Appointment focused on domain rules only.
+
+Exit Question — Why can code be object‑oriented syntactically but still have poor OO design?
+ecause syntax ≠ design.
+A program can use classes, objects, inheritance, and still be poorly designed if:
+- responsibilities are mixed
+- domain rules live in the UI
+- classes expose internal state
+- inheritance is misused
+- objects depend on infrastructure (SQL, APIs)
+- invariants are not protected
+Good OO design is about responsibility, boundaries, and behaviour, not just using the class keyword.
