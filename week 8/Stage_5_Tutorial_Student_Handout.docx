@@ -1,0 +1,68 @@
+Stage 5 Tutorial Activities – Architecture & Responsibility:
+Activity 1 — Where Does This Belong?
+| Responsibility                 | Layer                | Reason |
+|-------------------------------|----------------------|--------|
+| Read menu input               | UI Layer             | Only UI interacts with the user directly. |
+| Check appointment status      | Domain Layer         | Status rules are business logic, not UI or DB. |
+| Coordinate booking use case   | Application Layer    | Orchestrates domain objects + workflow steps. |
+| Execute SQLite INSERT         | Data Access Layer    | Persistence belongs in repository/database layer. |
+| Format confirmation message   | UI Layer             | Presentation concern, not domain logic. |
+| Find appointment by ID        | Data Access Layer    | Retrieval is a repository responsibility. |
+
+Activity 2 — Architecture Smell Hunt:
+A SmartCare file contains:
+input(), SQL, appointment conflict rules, printing, validation. All mixed together.
+Five architecture problems + fixes:
+1. UI logic mixed with domain logic
+   Problem: input() inside business logic.
+   Fix: Move input handling to UI layer.
+
+2. SQL inside domain classes
+   Problem: Domain objects know how data is stored.
+   Fix: Move SQL to repository layer.
+
+3. Appointment conflict rules inside UI
+   Problem: Business rules scattered.
+   Fix: Move conflict detection to domain layer.
+
+4. Printing inside domain logic
+   Problem: Domain shouldn’t format output.
+   Fix: Move printing to UI layer.
+
+5. Validation inside database code
+   Problem: Validation belongs to domain, not persistence.
+   Fix: Move validation to domain layer
+
+Activity 3 — SOLID Without Overengineering:
+ClinicManager handles every use case. Which principle is threatened?
+Single Responsibility Principle (SRP).  
+One class doing everything becomes a “God class”.
+
+AppointmentService imports sqlite3 directly. What dependency concern exists?
+Violates Dependency Inversion Principle (DIP).  
+High‑level services should depend on abstractions, not concrete DB modules.
+
+A repository interface has 20 methods but a client needs two. What concern exists?
+Interface Segregation Principle (ISP).  
+Clients should not depend on methods they don’t use.
+
+Should every class have an interface? Explain.
+No.  
+Interfaces are useful when multiple implementations exist or when decoupling is required.
+Simple domain entities (Patient, Practitioner, Appointment) do not need interfaces, they are not polymorphic and do not have alternate implementations.
+
+Activity 4 — AI Architecture Critique
+AI proposes:
+- microservices
+- event bus
+- six interfaces
+- dependency‑injection framework
+
+Decision: Reject, Defer, Keep
+| Proposal                     | Decision | Reason |
+|------------------------------|----------|--------|
+| Microservices                | Reject   | SmartCare is a tiny clinic system; monolith is simpler. |
+| Event bus                    | Reject   | No asynchronous workflows or distributed events. |
+| Six interfaces               | Defer    | Too many abstractions for current scope; may be useful later. |
+| Dependency-injection framework | Defer | Overkill now; useful only if system grows. |
+
