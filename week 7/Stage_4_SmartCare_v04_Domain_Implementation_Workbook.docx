@@ -1,0 +1,75 @@
+SmartCare v0.4 – Domain Implementation Workbook
+1. UML‑to‑Code Trace:
+| UML Element        | Python Element            | Implemented? | Notes                                      |
+|--------------------|---------------------------|--------------|--------------------------------------------|
+| Patient class      | Patient class             | Yes          | Attributes match UML (id, name, contact)   |
+| Practitioner class | Practitioner class        | Yes          | Availability + schedule implemented        |
+| Appointment class  | Appointment class         | Yes          | Links patient + practitioner               |
+| Associations       | Object references         | Yes          | Appointment stores patient & practitioner  |
+| Multiplicities     | Lists (history/schedule)  | Yes          | Patient.history & Practitioner.schedule    |
+| Status invariant   | Private status + methods  | Yes          | Only legal transitions allowed             |
+
+2. Domain Invariants:
+| Class        | Invariant / Rule                                      | How Protected                                      |
+|--------------|--------------------------------------------------------|-----------------------------------------------------|
+| Patient      | patientID cannot change                               | No setter; assigned once in __init__               |
+| Practitioner | availability must follow clinic rules                  | Updated only through controlled method             |
+| Appointment  | status must follow legal transitions (e.g., S→C)      | Private status; changed only via cancel()/complete()|
+| Appointment  | must always link valid patient + practitioner          | Constructor requires both objects                  |
+| Appointment  | time/date cannot be changed after creation             | No public setter for date/time                     |
+
+3. Composition / Inheritance Decisions:
+| Relationship              | Decision               | Rationale                                           |
+|---------------------------|------------------------|-----------------------------------------------------|
+| Appointment ↔ Patient     | Composition/association| Appointment *has a* patient; not a subtype         |
+| Appointment ↔ Practitioner| Composition/association| Appointment *has a* practitioner                    |
+| Doctor ↔ Practitioner     | Inheritance            | Doctor *is a* type of practitioner                 |
+| Clinic ↔ Appointment      | Composition/association| Clinic *contains* appointments; aggregate root     |
+
+4. AI Pair‑Programming Record:
+| AI Contribution                     | Conforms? | Decision   | Reason                                           | Verification                     |
+|-------------------------------------|-----------|------------|--------------------------------------------------|----------------------------------|
+| Add NotificationManager             | No        | Rejected   | Out of scope; no requirement supports it         | Requirements FR/NFR checked      |
+| Add AppointmentManager              | No        | Rejected   | Implementation detail, not domain concept        | UML + domain rules checked       |
+| Add UserRole class                  | Yes       | Accepted   | Supported by NFR-03 (security)                   | Requirement ID verified          |
+| Add ScheduleView class              | Partial   | Modified   | Behaviour exists but not a standalone class      | FR-09 supports behaviour only    |
+| Add inheritance from PatientRecord  | No        | Rejected   | Incorrect hierarchy; Appointment ≠ PatientRecord | Domain model checked             |
+
+5. Updated UML:
+Justified Change: Added UserRole class
+Reason: During implementation, access control became necessary to protect patient/practitioner data (supported by NFR‑03).
+This is a legitimate domain concept, not an invented feature.
+
+Updated UML Diagram:
++----------------+        1        *      +------------------+
+|    Patient     |------------------------|    Appointment    |
++----------------+                        +------------------+
+| patientID      |                        | appointmentID     |
+| name           |                        | date              |
+| contact        |                        | time              |
++----------------+                        | status            |
+                                          | patientID         |
+                                          | practitionerID    |
+                                          +------------------+
+                                                     *
+                                                     |
+                                                     |
+                                                     1
+                                          +------------------+
+                                          |   Practitioner   |
+                                          +------------------+
+                                          | practitionerID   |
+                                          | name             |
+                                          | availability     |
+                                          +------------------+
+
++------------------+
+|    UserRole      |
++------------------+
+| roleID           |
+| roleName         |
++------------------+
+
+Explanation of Change:
+- UserRole added to support access control (NFR‑03).
+- No other structural changes were required — implementation matched UML cleanly.
