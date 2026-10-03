@@ -1,0 +1,98 @@
+A — Inspect SmartCare v0.4:
+| Responsibility Type | Evidence in v0.4 Code                          | Problem                                      |
+|---------------------|------------------------------------------------|----------------------------------------------|
+| Presentation         | input(), print() inside main SmartCare file    | UI mixed with domain + workflow              |
+| Workflow             | booking logic inside Appointment class         | Domain object doing orchestration            |
+| Domain               | validation inside persistence code             | Wrong layer owning business rules            |
+| Data-access          | sqlite3 calls inside AppointmentService        | Service depends on concrete DB               |
+| Persistence          | SQL queries inside domain methods              | Domain tied to storage                       |
+
+B — Propose Architecture:
+Layered Architecture (v0.5) - 
+Presentation → Service → Domain → Repository → Persistence
+
+- Presentation: CLI/UI only
+- Service: Coordinates use cases
+- Domain: Entities + rules
+- Repository: Abstract persistence
+- Persistence: SQLite implementation
+
+C — Create Package Structure:
+smartcare/
+    presentation/
+    services/
+    domain/
+    repositories/
+    persistence/
+
+Justification:
+- Matches standard layered architecture
+- Clean separation of concerns
+- Enables testing domain without DB
+- Supports DIP 
+
+D — Introduce AppointmentService:
+Goal
+- Move workflow coordination out of Appointment and into a dedicated service.
+
+Responsibilities of AppointmentService
+- Validate booking workflow
+- Check practitioner availability
+- Call domain methods 
+- Use repository to load/save appointments
+
+DO NOT DO:
+- Domain logic 
+- SQL
+- UI formatting
+
+E — Repository Abstraction:
+Minimal AppointmentRepository Interface:
+class AppointmentRepository:
+    def get_by_id(self, appointment_id: str): ...
+    def save(self, appointment): ...
+
+F — AI Architecture Review:
+AI Prompt Used - 
+Act as a software architecture reviewer. Review this small SmartCare Python system against separation 
+of concerns, cohesion, coupling and introductory SOLID principles. Identify concrete layer violations 
+and dependency risks. Prefer the simplest refactoring that solves an observed problem. Do not introduce
+frameworks, microservices or patterns unless current requirements justify them.
+
+AI Feedback Summary - 
+| Issue Identified by AI            | Valid? | Decision     | Reason                                     |
+|----------------------------------|--------|--------------|---------------------------------------------|
+| Service layer depends on sqlite3 | Yes    | Accepted     | Violates DIP; repository abstraction needed |
+| Appointment has workflow logic   | Yes    | Accepted     | Domain should not coordinate use cases      |
+| Suggest microservices            | No     | Rejected     | Overkill for single-clinic system           |
+| Suggest event bus                | No     | Rejected     | No async workflows                          |
+| Suggest DI framework             | Partial| Deferred     | Useful later, not justified now             |
+
+G — Refactor and Verify:
+Refactoring Applied - 
+- Moved SQL to persistence layer
+- Introduced AppointmentRepository
+- Created AppointmentService
+- Removed workflow logic from domain
+- Presentation layer now only handles input/output
+
+Verification - 
+- Booking still works
+- Status transitions still enforced
+- Cancel → Complete illegal transition still raises error
+- No SQL inside domain
+- No UI inside domain or service
+
+H — Reflection:
+One AI Suggestion Accepted:
+“Service layer should not import sqlite3 directly.”  
+Accepted because it violated DIP and tightly coupled the service to persistence.
+
+One AI Suggestion Modified:
+“Introduce dependency injection framework.”  
+Modified: kept constructor injection only, deferred full DI framework.
+
+One AI Suggestion Rejected:
+“Convert SmartCare into microservices.”  
+Rejected because SmartCare is a small, single‑clinic system with no distributed requirements.
+
