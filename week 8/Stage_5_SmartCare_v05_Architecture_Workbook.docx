@@ -1,0 +1,94 @@
+SmartCare v0.5 – Architecture & Refactoring Workbook:
+
+Current Architecture Problems:
+| Problem                               | Evidence                                           | Impact                                           | Refactoring                                      |
+|---------------------------------------|----------------------------------------------------|--------------------------------------------------|--------------------------------------------------|
+| UI mixed with domain logic            | input(), print() inside Appointment                | Hard to test; violates separation of concerns    | Move UI logic to Presentation layer              |
+| SQL inside domain classes             | sqlite3 calls inside AppointmentService            | Domain depends on persistence                    | Move SQL to Repository/Persistence layer         |
+| Business rules scattered              | Conflict checks in UI + DB layer                   | Inconsistent behaviour                           | Centralise rules in Domain layer                 |
+| God-class service                     | ClinicManager handles all use cases                | SRP violation; unmaintainable                    | Split into smaller use-case services             |
+| Validation in persistence layer       | DB code checks patient name                        | Wrong responsibility                              | Move validation to Domain layer                  |
+
+Layer Responsibilities:
+Presentation Layer -
+| Responsibilities               | Must NOT contain                      |
+|--------------------------------|---------------------------------------|
+| Read input                     | Business rules                        |
+| Display output                 | SQL                                   |
+| Format messages                | Domain invariants                     |
+
+Service/Application Layer -
+| Responsibilities               | Must NOT contain                      |
+|--------------------------------|---------------------------------------|
+| Coordinate use cases           | SQL                                   |
+| Orchestrate workflows          | UI logic                              |
+| Call domain objects            | Domain invariants                     |
+
+Domain Layer -
+| Responsibilities               | Must NOT contain                      |
+|--------------------------------|---------------------------------------|
+| Business rules                 | SQL                                   |
+| Validation                     | UI formatting                         |
+| Status transitions             | Input handling                        |
+| Invariants                     | Persistence logic                     |
+
+Repository Layer -
+| Responsibilities               | Must NOT contain                      |
+|--------------------------------|---------------------------------------|
+| Retrieve domain objects        | Business rules                        |
+| Save/update domain objects     | UI logic                              |
+| Abstract persistence           | Workflow logic                        |
+
+Persistence Layer - 
+| Responsibilities               | Must NOT contain                      |
+|--------------------------------|---------------------------------------|
+| Execute SQLite operations      | Domain logic                          |
+| Low-level DB access            | Use-case coordination                 |
+
+Architecture Diagram:
++----------------------+
+|   Presentation Layer |
+| (UI / CLI / Web)     |
++----------+-----------+
+           |
+           v
++----------------------+
+|   Service Layer      |
+| (Use-case orchestration)
++----------+-----------+
+           |
+           v
++----------------------+
+|   Domain Layer       |
+| (Entities + Rules)   |
++----------+-----------+
+           |
+           v
++----------------------+
+|   Repository Layer   |
+| (Interfaces + Adapters)
++----------+-----------+
+           |
+           v
++----------------------+
+|   Persistence Layer  |
+| (SQLite / DB driver) |
++----------------------+
+
+SOLID Review:
+| Principle | Relevant? | Evidence                                      | Decision                                       |
+|-----------|-----------|-----------------------------------------------|------------------------------------------------|
+| SRP       | Yes       | ClinicManager handles all use cases           | Split into smaller services                    |
+| OCP       | Mild      | Hard-coded status transitions                 | Domain OK; persistence may need abstraction    |
+| LSP       | No        | No inheritance hierarchy in v0.5              | Not applicable                                 |
+| ISP       | Yes       | Repository interface has 20 methods           | Split into smaller interfaces                  |
+| DIP       | Yes       | AppointmentService imports sqlite3 directly   | Introduce repository abstraction               |
+
+AI Architecture Review:
+| AI Suggestion            | Observed Problem? | Decision | Reason                                           | Verification                          |
+|--------------------------|-------------------|----------|--------------------------------------------------|---------------------------------------|
+| Microservices            | Yes               | Reject   | SmartCare is small; monolith is simpler          | Requirements show single-clinic scope |
+| Event bus                | Yes               | Reject   | No async workflows or distributed events         | No FR/NFR support                     |
+| Six interfaces           | Partial           | Defer    | Over-engineered now; may be useful later         | UML + scope review                    |
+| Dependency injection     | Partial           | Defer    | Useful only if system grows                      | Current codebase too small            |
+| Repository abstraction   | No                | Keep     | Needed for DIP + testability                     | Matches v0.5 architecture             |
